@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import Btn from "./src/components/Btn";
+import HomeProducts from "./src/components/HomeProducts";
+import HomeSearch from "./src/components/HomeSearch";
+import CartEmpty from "./src/components/CartEmpty";
+import CartItem from "./src/components/Carttem";
+import OrderInfo from "./src/components/OrderInfo";
+import { View, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import Colors from "./src/color";
 
-export default function App() {
+export default function App(){
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <OrderInfo 
+      icon="person"
+      title="Customer"
+      subTitle="Duy"
+      text="duyyyyyy@gmail.com"
+      />
+      <OrderInfo 
+      icon="location"
+      title="Order Infomation"
+      subTitle="Address:"
+      text="UIT"
+      success={true}
+      />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    backgroundColor: Colors.subGreen,
+  }
+})
