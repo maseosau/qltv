@@ -9,15 +9,19 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-community/checkbox": "^0.5.16",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "deprecated-react-native-prop-types": "^5.0.0",
     "expo": "~49.0.15",
+    "expo-checkbox": "^2.5.0",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-native": "0.72.6",
-    "react-native-check-box": "^2.1.7",
     "react-native-numeric-input": "^1.9.1",
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-vector-icons": "^10.0.2"

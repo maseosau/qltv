@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image, View, Text, ScrollView, StyleSheet } from "react-native";
 import Colors from "../color";
-import NumericInput from "react-native-numeric-input";
+// import NumericInput from "react-native-numeric-input";
 import Btn from "../Components/Btn";
 import Message from "../Components/Message";
 import ProductList from "../Components/ProductList";
@@ -54,7 +54,7 @@ export default function ProductDetail() {
                     <Text style={styles.productDetailPrice}>
                         Price: ${product.price}
                     </Text>
-                    <NumericInput
+                    {/* <NumericInput
                         value={quantity}
                         onChange={value => setQuantity(value)}
                         totalWidth={140}
@@ -64,7 +64,7 @@ export default function ProductDetail() {
                         minValue={1}
                         maxValue={99}
                         textColor={Colors.main}
-                    />
+                    /> */}
                 </View>
                 <Text style={styles.productDetailDescription}>
                     {product.description}
