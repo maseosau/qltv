@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, ScrollView, Pressable, Image, View } from 'react-native';
 import Colors from '../color';
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProductList({ products }) {
+    const navigation = useNavigation();
     return (
         <View style={styles.productList}>
             {
                 products.map((product) => (
-                    <Pressable key={product.id} style={styles.product}>
+                    <Pressable key={product.id} style={styles.product} onPress={() => navigation.navigate("Single")}>
                         <Image source={product.image} alt={product.name} style={styles.productImage} />
                         <View style={styles.productContent}>
                             <Text style={styles.productPrices}>
