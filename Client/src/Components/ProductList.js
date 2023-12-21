@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, ScrollView, Pressable, Image, View } from 'react-native';
 import Colors from '../color';
 import { useNavigation } from "@react-navigation/native";
+import Rating from './Rating';
 
 export default function ProductList({ products }) {
     const navigation = useNavigation();
@@ -13,7 +14,7 @@ export default function ProductList({ products }) {
                         <Image source={product.image} alt={product.name} style={styles.productImage} />
                         <View style={styles.productContent}>
                             <Text style={styles.productPrices}>
-                                {product.price}
+                                ${product.price}
                             </Text>
                             <Text style={styles.productName}
                                 numberOfLines={2}
@@ -21,6 +22,7 @@ export default function ProductList({ products }) {
                             >
                                 {product.name}
                             </Text>
+                            <Rating value={product.rating} />
                         </View>
                     </Pressable>
                 ))
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     productName: {
+        fontWeight: 'bold',
         fontSize: 10,
         marginTop: 5,
     },

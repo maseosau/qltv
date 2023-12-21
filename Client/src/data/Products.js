@@ -2,8 +2,8 @@ const Products = [
     {
         id: 1,
         image: require('../../assets/favicon.png'),
-        name: "Text",
-        price: 111,
+        name: "Product Name Here",
+        price: 123,
         rating: 5,
         description: "Text description Text description Text description Text description Text description",
         countInStock: 10,
@@ -12,8 +12,8 @@ const Products = [
     {
         id: 2,
         image: require('../../assets/favicon.png'),
-        name: "Text",
-        price: 111,
+        name: "Product Name Here",
+        price: 456,
         rating: 3.5,
         description: "Text description Text description Text description Text description Text description",
         countInStock: 10,
@@ -22,7 +22,7 @@ const Products = [
     {
         id: 3,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -32,7 +32,7 @@ const Products = [
     {
         id: 4,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -42,7 +42,7 @@ const Products = [
     {
         id: 5,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -52,7 +52,7 @@ const Products = [
     {
         id: 6,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -62,7 +62,7 @@ const Products = [
     {
         id: 7,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -72,7 +72,7 @@ const Products = [
     {
         id: 8,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -82,7 +82,7 @@ const Products = [
     {
         id: 9,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -92,7 +92,7 @@ const Products = [
     {
         id: 10,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -102,7 +102,7 @@ const Products = [
     {
         id: 11,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",
@@ -112,7 +112,7 @@ const Products = [
     {
         id: 12,
         image: require('../../assets/favicon.png'),
-        name: "Text",
+        name: "Product Name Here",
         price: 111,
         rating: 3,
         description: "Text description Text description Text description Text description Text description",

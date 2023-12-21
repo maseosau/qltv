@@ -7,7 +7,11 @@ import HomeSearch from "../Components/HomeSearch";
 function HomeScreen() {
   return (
     <ScrollView>
-      <View style={{ flex: 1, backgroundColor: Colors.subGreen }}>
+      <View style={{ 
+          flex: 1, 
+          backgroundColor: Colors.subGreen,
+        }}
+      >
         <HomeSearch />
         <HomeProducts />
       </View>
