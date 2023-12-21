@@ -5,7 +5,7 @@ dotenv.config();
 
 async function connect() {
     try {
-        await mongoose.connect("mongodb://127.0.0.1:27017/chiccloset")
+        await mongoose.connect("mongodb+srv://21520766:QuocDuy123@cluster0.e0qaj3r.mongodb.net/?retryWrites=true&w=majority")
         console.log('Connected to Mongoose')
     }
     catch (err) {
