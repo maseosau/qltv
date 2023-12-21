@@ -71,7 +71,7 @@ import Btn from "../Btn";
 
 const Inputs = [
   {
-    label: "User Name",
+    label: "User name",
     type: "text",
   },
   {
@@ -90,24 +90,25 @@ const Inputs = [
 
 const Profile = () => {
   return (
-    <View style={{ height: "100%", backgroundColor: Colors.white, paddingHorizontal: 5 }}>
+    <View style={{ height: "100%", backgroundColor: Colors.white, paddingHorizontal: 20 }}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ marginTop: 5, paddingBottom: 10 }}>
+        <View style={{ marginTop: 30, paddingBottom: 10 }}>
           {Inputs.map((i, index) => (
-            <View key={index} style={{ marginBottom: 10 }}>
-              <Text style={{ fontSize: 12, fontWeight: "bold" }}>{i.label}</Text>
+            <View key={index} style={{ marginBottom: 20 }}>
+              <Text style={{ fontSize: 17, fontWeight: "bold" }}>{i.label}</Text>
               <TextInput
                 style={{
                   borderWidth: 0.5,
                   backgroundColor: Colors.subGreen,
                   borderColor: Colors.main,
-                  paddingVertical: 4,
+                  paddingVertical: 5,
+                  paddingHorizontal: 10,
                   color: Colors.main,
-                  fontSize: 15,
+                  fontSize: 17,
                 }}
                 secureTextEntry={i.type === "password"}
                 keyboardType={i.type === "email" ? "email-address" : "default"}
-                placeholder={i.label}
+                // placeholder={i.label}
                 placeholderTextColor={Colors.main}
                 underlineColorAndroid="transparent"
                 selectTextOnFocus={true}
@@ -118,12 +119,14 @@ const Profile = () => {
               />
             </View>
           ))}
-          <Btn
-            bgColor={Colors.main}
-            color= {Colors.white}
-            text= "UPDATE PROFILE"
-            onPress={() => console.log("Submit pressed")}
-          />
+          <View style={{ marginTop: 50 }}>
+            <Btn
+              bgColor={Colors.main}
+              color= {Colors.white}
+              text= "UPDATE PROFILE"
+              onPress={() => console.log("Submit pressed")}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>
