@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import Colors from '../color';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import NumericInput from 'react-native-numeric-input'; // Kiểm tra xem thư viện này đã được import đúng chưa
+// import NumericInput from 'react-native-numeric-input'; // Kiểm tra xem thư viện này đã được import đúng chưa
 import Icon from 'react-native-vector-icons/Ionicons'; // Đảm bảo thư viện icon đã được import
 
 const CartItem = () => {
@@ -118,7 +118,7 @@ const CartItem = () => {
                             <Text style={styles.cartItemPrice}>
                                 ${item.price}
                             </Text>
-                            <NumericInput
+                            {/* <NumericInput
                                 value={item.quantity}
                                 onChange={(value) => updateQuantity(index, value)}
                                 totalWidth={100}
@@ -132,7 +132,7 @@ const CartItem = () => {
                                 textColor={Colors.black}
                                 iconStyle={{ color: Colors.white }}
                                 rightButtonBackgroundColor={Colors.main}
-                                leftButtonBackgroundColor={Colors.main} />
+                                leftButtonBackgroundColor={Colors.main} /> */}
                         </View>
                     </View>
                 </View>

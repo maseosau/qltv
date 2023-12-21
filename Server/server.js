@@ -4,22 +4,22 @@ const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose");
 const path = require('path');
 const app = express();
-
+const cors = require('cors');
+const route = require('./routes')
 const db = require('./config/db');
-// const route = require('./routes');
 
 db.connect();
 
 dotenv.config();
 const port = process.env.PORT || 3000;
 
-
+app.use(cors());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cookieParser());
 
 
-// route(app);
+route(app);
 
 app.listen(port, function (err) {
     if (err) {

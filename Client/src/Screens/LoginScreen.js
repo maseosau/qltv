@@ -1,15 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Colors from "../color";
 import InputField from "../Components/InputField";
 import Btn from "../Components/Btn";
-import { View, Text, Image, TouchableOpacity, StyleSheet, } from "react-native"
-import CheckBox from "react-native-check-box";
+import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from "react-native"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import CheckBox from "expo-checkbox";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useAuth } from "../contexts/authContext";
+import axios from 'axios';
+import { NAME_API } from "../config/ApiConfig";
 
 export default function LoginScreen() {
-    const [username, setUsername] = useState('');
+    const { username, setUsername } = useAuth();
     const [password, setPassword] = useState('');
     const [isCheckbox, setIsCheckbox] = useState(false);
+
+    useEffect(() => {
+        const loadRememberMe = async () => {
+            try {
+                const rememberMeValue = await AsyncStorage.getItem('rememberMe');
+                if (rememberMeValue !== null && rememberMeValue === 'true') {
+                    // If rememberMeValue is 'true', set the checkbox as checked
+                    setIsCheckbox(true);
+                    // Additionally, you might want to automatically populate the username field here
+                }
+            } catch (error) {
+                console.error('Error loading rememberMe preference:', error);
+            }
+        };
+        loadRememberMe();
+    }, []);
+
+    const login = () => {
+        axios.post(NAME_API + '/login', {
+            username, password
+        })
+            .then(async (response) => {
+                if (response.status === 200) {
+                    const token = response.data.token;
+                    // Lưu token vào AsyncStorage
+                    try {
+                        await AsyncStorage.setItem('userToken', token);
+
+                        // Save remember me preference if checkbox is checked
+                        if (isCheckbox) {
+                            await AsyncStorage.setItem('rememberMe', 'true');
+                        } else {
+                            // If not checked, remove the rememberMe value from AsyncStorage
+                            await AsyncStorage.removeItem('rememberMe');
+                        }
+                    } catch (error) {
+                        console.error('Error saving token to AsyncStorage:', error);
+                    }
+                }
+                else {
+                    Alert.alert("Login failed", "Incorrect username or passwordddddddddddd")
+                }
+            })
+            .catch(error => {
+                Alert.alert("Login failed", "Incorrect username or password")
+            });
+    }
+
+
     return (
         <View style={styles.loginContainer}>
             <Image style={styles.loginLogo} source={require('../../assets/small_logo_official.png')} />
@@ -28,10 +81,15 @@ export default function LoginScreen() {
             <View style={styles.loginOptions}>
                 <View style={styles.loginRemember}>
                     <CheckBox
-                        isChecked={isCheckbox}
-                        onClick={() => setIsCheckbox(!isCheckbox)}
+                        disabled={false}
+                        value={isCheckbox}
+                        onValueChange={() => setIsCheckbox(!isCheckbox)}
                     />
-                    <Text> 
+                    {/* <CheckBox
+                        isChecked={isCheckbox}
+                        onClick={}
+                    /> */}
+                    <Text>
                         Remember me
                     </Text>
                 </View>
@@ -40,7 +98,7 @@ export default function LoginScreen() {
                 </TouchableOpacity>
 
             </View>
-            <Btn text="LOGIN" width="100%" />
+            <Btn text="LOGIN" width="100%" onPress={() => login()} />
             <View style={styles.loginAnotherContainer}>
                 <Text style={styles.loginAnother}>
                     Or login with
