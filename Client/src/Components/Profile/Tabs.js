@@ -249,25 +249,27 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Dimensions } from 'react-native';
+import Orders from "../Profile/Orders";
+import Profile from "../Profile/Profile";
 
 
-const Orders = () => {
-  return (
-    <View>
-      <Text>This is the Orders screen content.</Text>
-      {/* Add more JSX to display the content you want */}
-    </View>
-  );
-};
+// const Orders = () => {
+//   return (
+//     <View>
+//       <Text>This is the Orders screen content.</Text>
+//       {/* Add more JSX to display the content you want */}
+//     </View>
+//   );
+// };
 
-const Profile = () => {
-  return (
-    <View>
-      <Text>This is the Profile screen content.</Text>
-      {/* Add more JSX to display the content you want */}
-    </View>
-  );
-};
+// const Profile = () => {
+//   return (
+//     <View>
+//       <Text>This is the Profile screen content.</Text>
+//       {/* Add more JSX to display the content you want */}
+//     </View>
+//   );
+// };
 
 const initialLayout = { width: Dimensions.get('window').width };
 
