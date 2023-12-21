@@ -57,8 +57,8 @@ export default function ProfileScreen() {
           }}
           style={styles.profileImage}
         />
-        <Text style={styles.profileName}>Admin Doe</Text>
-        <Text style={styles.joinDate}>Joined Dec 12 2022</Text>
+        <Text style={styles.profileName}>Admin Sau</Text>
+        <Text style={styles.joinDate}>Joined Dec 12 2023</Text>
       </View>
       <Tabs />
     </View>
