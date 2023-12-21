@@ -50,7 +50,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import Colors from "../color";
 
 function Rating({ value, text }) {
-  const size = 8;
+  const size = 10;
   const color = Colors.orange;
 
   return (

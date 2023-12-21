@@ -114,14 +114,14 @@ const Profile = () => {
                 autoCapitalize="none"
                 autoCompleteType="off"
                 autoCorrect={false}
-                onFocus={() => {}}
+                onFocus={() => { }}
               />
             </View>
           ))}
           <Btn
             bgColor={Colors.main}
-            color= {Colors.white}
-            text= "UPDATE PROFILE"
+            color={Colors.white}
+            text="UPDATE PROFILE"
             onPress={() => console.log("Submit pressed")}
           />
         </View>
