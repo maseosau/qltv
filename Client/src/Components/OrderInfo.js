@@ -44,10 +44,13 @@ export default function OrderInfo({icon, title, subTitle, text, success, danger}
 
 const styles = StyleSheet.create({
     orderInfoContainer: {
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: Colors.white,
-        width: "100%",
+        width: "28%",
+        height: "50%",
+        // flex: 1,
+        // alignSelf: 'flex-start',
         paddingVertical: 10,
         borderRadius: 15,
         marginBottom: 10,

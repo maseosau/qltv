@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { TextInput, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Colors from "../color";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeSearch() {
     const [keyword, setKeyword] = useState('');
+    const navigation = useNavigation();
     return (
         <View style={styles.searchContainer}>
             <View style={styles.searchBar}>
@@ -15,7 +17,7 @@ export default function HomeSearch() {
                     onChangeText={setKeyword}
                 />
             </View>
-            <TouchableOpacity >
+            <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
                 <Icon name='cart-outline' style={styles.cartIcon} />
                 <View style={styles.badgeContainer}>
                     <Text style={styles.badgeContent}>1</Text>

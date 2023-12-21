@@ -1,16 +1,31 @@
 import React from "react";
-import RegisterScreen from "./src/Screens/RegisterScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { StatusBar, View } from "react-native";
 import LoginScreen from "./src/Screens/LoginScreen";
-import { View, StyleSheet } from "react-native";
-import Colors from "./src/color";
-import CartEmpty from "./src/Components/CartEmpty";
-import ProductDetail from "./src/Screens/ProductDetail";
-import { AuthProvider } from "./src/contexts/authContext";
+import RegisterScreen from "./src/Screens/RegisterScreen";
+import BottomNav from "./src/Navigations/BottomNav";
+import ShippingScreen from "./src/Screens/ShippingScreen";
+import PaymentScreen from "./src/Screens/PaymentScreen";
+import PlaceOrderScreen from "./src/Screens/PlaceOrderScreen";
+import OrderScreen from "./src/Screens/OrderScreen";
 
-export default function App(){
+const Stack = createStackNavigator();
+
+export default function App() {
   return (
-    <AuthProvider>
-      <LoginScreen />
-    </AuthProvider>
-  )
+    <NavigationContainer>
+      <StatusBar hidden={true} />
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+        {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
+        <Stack.Screen name="Bottom" component={BottomNav} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
