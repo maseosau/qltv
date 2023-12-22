@@ -3,6 +3,7 @@ import { TouchableOpacity, StyleSheet, Text, ScrollView, Pressable, Image, View 
 import Colors from '../color';
 import { useNavigation } from "@react-navigation/native";
 import Rating from './Rating';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function ProductList({ products }) {
     const navigation = useNavigation();
@@ -13,16 +14,23 @@ export default function ProductList({ products }) {
                     <Pressable key={product.id} style={styles.product} onPress={() => navigation.navigate("Single")}>
                         <Image source={product.image} alt={product.name} style={styles.productImage} />
                         <View style={styles.productContent}>
-                            <Text style={styles.productPrices}>
-                                {product.price}
-                            </Text>
                             <Text style={styles.productName}
                                 numberOfLines={2}
                                 ellipsizeMode='tail'
                             >
                                 {product.name}
                             </Text>
-                            <Rating value={3}  />
+                            <View style={styles.smallContainer}>
+                                <View style={styles.priceAndRating}>
+                                    <Text style={styles.productPrices}>
+                                        ${product.price}
+                                    </Text>
+                                    <Rating value={product.rating} />
+                                </View>
+                                <Pressable style={styles.addToCart}>
+                                    <AntDesign name="pluscircle" size={30} color={Colors.paypal} />
+                                </Pressable>
+                            </View>
                         </View>
                     </Pressable>
                 ))
@@ -62,7 +70,13 @@ const styles = StyleSheet.create({
         color: Colors.red,
     },
     productName: {
-        fontSize: 14,
+        fontWeight: 'bold',
+        fontSize: 10,
         marginTop: 5,
     },
+    smallContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    }
 })

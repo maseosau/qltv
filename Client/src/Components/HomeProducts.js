@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, ScrollView, Pressable, Image, View } from 'react-native';
 import Colors from '../color';
 import ProductList from './ProductList';
+import Products from "../data/Products";
 
 export default function HomeProducts() {
     const [products, setProducts] = useState([
@@ -80,7 +81,7 @@ export default function HomeProducts() {
     ]);
     return (
         <ScrollView style={styles.productListContainer}>
-            <ProductList products={products} />
+            <ProductList products={Products} />
         </ScrollView>
     )
 }
@@ -88,6 +89,7 @@ export default function HomeProducts() {
 const styles = StyleSheet.create({
     productListContainer: {
         flex: 1,
+        padding: 10,
     },
     
 

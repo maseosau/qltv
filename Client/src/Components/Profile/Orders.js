@@ -89,7 +89,7 @@ import Colors from "../../color";
 
 const Orders = () => {
     return (
-        <View style={{ height: "100%", backgroundColor: Colors.white, paddingTop: 5 }}>
+        <View style={{ height: "100%", backgroundColor: Colors.white, paddingVertical: 30, paddingHorizontal: 20 }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 {/* Paid Order */}
                 <Pressable>
@@ -99,18 +99,18 @@ const Orders = () => {
                             justifyContent: "space-between",
                             alignItems: "center",
                             backgroundColor: Colors.deepGray,
-                            paddingVertical: 5,
+                            paddingVertical: 10,
                             paddingHorizontal: 2,
                         }}
                     >
-                        <Text style={{ fontSize: 9, color: Colors.blue }} numberOfLines={1}>
+                        <Text style={{ fontSize: 10, color: Colors.blue }} numberOfLines={1}>
                             64645383844766557
                         </Text>
-                        <Text style={{ fontSize: 12, fontWeight: "bold", color: Colors.black }} numberOfLines={1}>
+                        <Text style={{ fontSize: 15, fontWeight: "bold", color: Colors.black }} numberOfLines={1}>
                             PAID
                         </Text>
-                        <Text style={{ fontSize: 11, fontStyle: "italic", color: Colors.black }} numberOfLines={1}>
-                            Dec 12 2023
+                        <Text style={{ fontSize: 13, fontStyle: "italic", color: Colors.black }} numberOfLines={1}>
+                            Dec 13 2023
                         </Text>
                         <Pressable
                             style={{
@@ -131,18 +131,18 @@ const Orders = () => {
                             flexDirection: "row",
                             justifyContent: "space-between",
                             alignItems: "center",
-                            paddingVertical: 5,
+                            paddingVertical: 10,
                             paddingHorizontal: 2,
                         }}
                     >
-                        <Text style={{ fontSize: 9, color: Colors.blue }} numberOfLines={1}>
+                        <Text style={{ fontSize: 10, color: Colors.blue }} numberOfLines={1}>
                             64645383844766557
                         </Text>
-                        <Text style={{ fontSize: 12, fontWeight: "bold", color: Colors.black }} numberOfLines={1}>
+                        <Text style={{ fontSize: 15, fontWeight: "bold", color: Colors.black }} numberOfLines={1}>
                             NOT PAID
                         </Text>
-                        <Text style={{ fontSize: 11, fontStyle: "italic", color: Colors.black }} numberOfLines={1}>
-                            Jan 12 2023
+                        <Text style={{ fontSize: 13, fontStyle: "italic", color: Colors.black }} numberOfLines={1}>
+                            Dec 12 2023
                         </Text>
                         <Pressable
                             style={{

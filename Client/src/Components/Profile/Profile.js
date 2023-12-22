@@ -131,12 +131,13 @@ const Profile = () => {
   }, [])
 
   return (
-    <View style={{ height: "100%", backgroundColor: Colors.white, paddingHorizontal: 5 }}>
+    <View style={{ height: "100%", backgroundColor: Colors.white, paddingHorizontal: 20 }}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ marginTop: 5, paddingBottom: 10 }}>
+        <View style={{ marginTop: 30, paddingBottom: 10 }}>
           {Inputs.map((i, index) => (
             <View key={index} style={{ marginBottom: 10 }}>
               <Text style={{ fontSize: 15, fontWeight: "bold" }}>{i.label}</Text>
+
               <TextInput
                 style={{
                   borderWidth: 0.5,

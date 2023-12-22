@@ -6,14 +6,16 @@ import HomeSearch from "../Components/HomeSearch";
 
 function HomeScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.subGreen }}>
-      <ScrollView>
-        <View style={{ flex: 1 }}>
-          <HomeSearch />
-          <HomeProducts />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView>
+      <View style={{ 
+          flex: 1, 
+          backgroundColor: Colors.subGreen,
+        }}
+      >
+        <HomeSearch />
+        <HomeProducts />
+      </View>
+    </ScrollView>
   );
 }
 
