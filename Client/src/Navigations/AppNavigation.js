@@ -1,9 +1,12 @@
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
 import UnauthenticatedNavigation from './UnauthenticatedNavigation';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Entypo, AntDesign, FontAwesome, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
+
 import HomeScreen from '../Screens/HomeScreen';
 import ShippingScreen from "../Screens/ShippingScreen";
 import PaymentScreen from "../Screens/PaymentScreen";
@@ -12,34 +15,34 @@ import ProductDetail from "../Screens/ProductDetail";
 import OrderScreen from "../Screens/OrderScreen";
 import CartScreen from "../Screens/CartScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Entypo, AntDesign, FontAwesome, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
+import SettingScreen from '../Screens/SettingScreen';
 import Colors from '../color';
+import { useAuth } from '../contexts/authContext';
+
 const Tab = createBottomTabNavigator();
 
-const retrieveToken = async () => {
-    try {
-        const userToken = await AsyncStorage.getItem('userToken');
-        if (userToken !== null) {
-            // Đã tìm thấy token, bạn có thể sử dụng nó ở đây
-            console.log('Token:', userToken);
-            return userToken;
-        } else {
-            // Nếu không tìm thấy token
-            console.log('Token không tồn tại.');
-            return null;
-        }
-    } catch (error) {
-        console.error('Lỗi khi lấy token từ AsyncStorage:', error);
-        return null;
-    }
-};
+// const retrieveToken = async () => {
+//     try {
+//         const userToken = await AsyncStorage.getItem('userToken');
+//         if (userToken !== null) {
+//             // Đã tìm thấy token, bạn có thể sử dụng nó ở đây
+//             return true;
+//         } else {
+//             // Nếu không tìm thấy token
+//             console.log('Token không tồn tại.');
+//             return false;
+//         }
+//     } catch (error) {
+//         console.error('Lỗi khi lấy token từ AsyncStorage:', error);
+//         return false;
+//     }
+// };
 
 
 const CustomTab = ({ children, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={styles.customTab}>
-    {children}
-  </TouchableOpacity>
+    <TouchableOpacity onPress={onPress} style={styles.customTab}>
+        {children}
+    </TouchableOpacity>
 );
 
 function HomeBottom() {
@@ -90,7 +93,7 @@ function HomeBottom() {
             {/* Profile */}
             <Tab.Screen
                 name="Profile"
-                component={ProfileScreen}
+                component={ProfileStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.center}>
@@ -112,9 +115,9 @@ function HomeStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="HomeScreen" component={HomeScreen}
-            options={{
-                headerShown: false,
-            }}
+                options={{
+                    headerShown: false,
+                }}
             />
             <Stack.Screen name="Single" component={ProductDetail} />
         </Stack.Navigator>
@@ -124,10 +127,10 @@ function HomeStack() {
 function CartStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="CartStack" component={CartScreen} 
-            options={{
-                headerShown: false,
-            }}
+            <Stack.Screen name="CartStack" component={CartScreen}
+                options={{
+                    headerShown: false,
+                }}
             />
             <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
             <Stack.Screen name="ShippingScreen" component={ShippingScreen} />
@@ -137,15 +140,38 @@ function CartStack() {
     )
 }
 
+function ProfileStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="ProfileScreen" component={ProfileScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen name="Settings" component={SettingScreen} />
+        </Stack.Navigator>
+    )
+}
+
 export default function AppNavigation() {
-    const token = retrieveToken();
+    // const [token, setToken] = useState(null);
+    const {isLoggedIn, setIsLoggedIn} = useAuth();
+
+    // useEffect(() => {
+    //     const getToken = async () => {
+    //         const retrievedToken = await retrieveToken();
+    //         setIsLoggedIn(retrievedToken);
+    //     };
+
+    //     getToken();
+    // }, [setIsLoggedIn]);
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{
                 headerShown: false,
             }}>
                 {
-                    token ?
+                    isLoggedIn ?
                         <Stack.Screen name="Home" component={HomeBottom} /> :
                         <Stack.Screen name="Auth" component={UnauthenticatedNavigation} />
                 }

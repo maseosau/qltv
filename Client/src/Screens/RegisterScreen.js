@@ -7,12 +7,19 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useAuth } from "../contexts/authContext";
 import axios from 'axios';
 import { NAME_API } from "../config/ApiConfig";
+import { useNavigation } from "@react-navigation/native";
 
 export default function RegisterScreen() {
-    const { username, email, setUsername, setEmail } = useAuth();
+    const [userData, setUserData] = useState({
+        username: '',
+        fullname: '',
+        phoneNumber: '',
+        email: '',
+        address: '',
+    });
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    const navigation = useNavigation();
 
     function isStrongPassword(password) {
         // Kiểm tra độ dài mật khẩu
@@ -47,10 +54,14 @@ export default function RegisterScreen() {
             return Alert.alert('Register failed', 'Passwords do not match');
         }
 
-        axios.post(NAME_API + '/register', {
-            email,
-            username,
-            password
+        // axios.get(NAME_API + 'getInfomation')
+        // .then(() => {
+
+        axios.post(NAME_API.LOCALHOST + '/register', {
+            email: userData.email,
+            username: userData.username,
+            fullname: userData.fullname,
+            password: password,
         })
         .then((response) => {
             if (response.status === 200) {
@@ -75,12 +86,16 @@ export default function RegisterScreen() {
             </Text>
             <InputField icon="mail"
                 placeholder="Enter your email"
-                value={email}
-                onChangeText={setEmail} />
+                value={userData.email}
+                onChangeText={(text) => setUserData({ ...userData, email: text })} />
             <InputField icon="person"
                 placeholder="Enter your username"
-                value={username}
-                onChangeText={setUsername} />
+                value={userData.username}
+                onChangeText={(text) => setUserData({ ...userData, username: text })} />
+            <InputField icon="person"
+                placeholder="Enter your full name"
+                value={userData.fullname}
+                onChangeText={(text) => setUserData({ ...userData, fullname: text })} />
             <InputField
                 icon="lock-closed-outline"
                 placeholder="Enter your password"
@@ -96,7 +111,7 @@ export default function RegisterScreen() {
                 <Text style={styles.loginText}>
                     Already have an account?
                 </Text>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
                     <Text style={styles.loginNavigate}>
                         Login now!
                     </Text>

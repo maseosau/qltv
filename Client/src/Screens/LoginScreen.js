@@ -9,46 +9,50 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useAuth } from "../contexts/authContext";
 import axios from 'axios';
 import { NAME_API } from "../config/ApiConfig";
+import { useNavigation } from "@react-navigation/native";
+import { jwtDecode } from "jwt-decode";
+import "core-js/stable/atob";
 
 export default function LoginScreen() {
-    const { username, setUsername } = useAuth();
+    const {setUserId, isLoggedIn, setIsLoggedIn} = useAuth();
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
     const [isCheckbox, setIsCheckbox] = useState(false);
+    const navigation = useNavigation();
 
     useEffect(() => {
         const loadRememberMe = async () => {
             try {
-                const rememberMeValue = await AsyncStorage.getItem('rememberMe');
-                if (rememberMeValue !== null && rememberMeValue === 'true') {
-                    // If rememberMeValue is 'true', set the checkbox as checked
-                    setIsCheckbox(true);
-                    // Additionally, you might want to automatically populate the username field here
+                const userToken = await AsyncStorage.getItem('userToken');
+                if (userToken !== null) {
+                    setIsLoggedIn(true);
+                }
+                else {
+                    console.log("Token not found");
+                    setIsLoggedIn(false);
                 }
             } catch (error) {
-                console.error('Error loading rememberMe preference:', error);
+                console.error('Error loading token:', error);
             }
         };
         loadRememberMe();
     }, []);
 
     const login = () => {
-        axios.post(NAME_API + '/login', {
-            username, password
+        axios.post(NAME_API.LOCALHOST + '/login', {
+            username: username, password: password,
         })
             .then(async (response) => {
                 if (response.status === 200) {
                     const token = response.data.token;
+                    const decode = jwtDecode(token);
+                    setUserId(decode.userId);
                     // Lưu token vào AsyncStorage
                     try {
-                        await AsyncStorage.setItem('userToken', token);
-
-                        // Save remember me preference if checkbox is checked
                         if (isCheckbox) {
-                            await AsyncStorage.setItem('rememberMe', 'true');
-                        } else {
-                            // If not checked, remove the rememberMe value from AsyncStorage
-                            await AsyncStorage.removeItem('rememberMe');
+                            await AsyncStorage.setItem('userToken', token);
                         }
+                        setIsLoggedIn(true);
                     } catch (error) {
                         console.error('Error saving token to AsyncStorage:', error);
                     }
@@ -58,6 +62,7 @@ export default function LoginScreen() {
                 }
             })
             .catch(error => {
+                console.error(error)
                 Alert.alert("Login failed", "Incorrect username or password")
             });
     }
@@ -105,14 +110,14 @@ export default function LoginScreen() {
                 </Text>
                 <View style={styles.loginSocial}>
                     <Btn icon="logo-facebook" text="Facebook" bgColor={Colors.blue} />
-                    <Btn icon="logo-github" text="Github" bgColor={Colors.black} />
+                    <Btn icon="logo-google" text="Google" bgColor={Colors.red} />
                 </View>
             </View>
             <View style={styles.registerContainer}>
                 <Text style={styles.registerText}>
                     Do not have an account?
                 </Text>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
                     <Text style={styles.registerNavigate}>
                         Register now!
                     </Text>

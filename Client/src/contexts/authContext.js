@@ -3,15 +3,12 @@ import React, { createContext, useContext, useState } from 'react';
 const AuthContext = createContext();
 //21520766 -  Đặng Quốc Duy
 export function AuthProvider({ children }) {
-    const [username, setUsername] = useState('');
-    const [fullname, setFullname] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
+    const [userId, setUserId] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     return (
         <AuthContext.Provider value={{
-            username, email, fullname, phoneNumber, address,
-            setUsername, setEmail, setFullname, setPhoneNumber, setAddress
+            userId, isLoggedIn,
+            setUserId, setIsLoggedIn
         }}>
             {children}
         </AuthContext.Provider>
