@@ -71,7 +71,7 @@
 
 
 import React from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native"; // Import necessary components from react-native
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from "react-native"; // Import necessary components from react-native
 import Colors from "../color";
 import CartEmpty from "../Components/CartEmpty";
 import CartItem from "../Components/Carttem";
@@ -81,7 +81,7 @@ import { useNavigation } from "@react-navigation/native";
 function CartScreen() {
     const navigation = useNavigation();
     return (
-        <View style={{ flex: 1, backgroundColor: Colors.subGreen }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: Colors.subGreen }}>
             {/* Header */}
             <View
                 style={{
@@ -157,7 +157,7 @@ function CartScreen() {
                     <Btn bgColor={Colors.black} color={Colors.white} text='CHECKOUT'  onPress={() => navigation.navigate("Shipping")}/>
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }
 

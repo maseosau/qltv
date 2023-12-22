@@ -7,12 +7,27 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useAuth } from "../contexts/authContext";
 import axios from 'axios';
 import { NAME_API } from "../config/ApiConfig";
+import { useNavigation } from "@react-navigation/native";
 
 export default function RegisterScreen() {
-    const { username, email, setUsername, setEmail } = useAuth();
+    const [userData, setUserData] = useState({
+        username: '',
+        fullname: '',
+        phoneNumber: '',
+        email: '',
+        address: '',
+    });
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [visiblePassword, setVisiblePassword] = useState(true);
+    const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(true);
 
+    const navigation = useNavigation();
+
+    function validateEmail(email) {
+        const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return emailPattern.test(email);
+    }
 
     function isStrongPassword(password) {
         // Kiểm tra độ dài mật khẩu
@@ -39,6 +54,14 @@ export default function RegisterScreen() {
     }
 
     const signUp = () => {
+        if (password.trim() === '' || confirmPassword.trim() === '') {
+            return Alert.alert("Register failed", "These fields cannot be left blank");
+        }
+
+        if (!validateEmail(userData.email)) {
+            return Alert.alert("Register failed", "Invalid Email")
+        }
+
         const isStrong = isStrongPassword(password);
         if (!isStrong) {
             return Alert.alert('Register failed', 'Password is not strong');
@@ -47,10 +70,12 @@ export default function RegisterScreen() {
             return Alert.alert('Register failed', 'Passwords do not match');
         }
 
-        axios.post(NAME_API + '/register', {
-            email,
-            username,
-            password
+
+        axios.post(NAME_API.LOCALHOST + '/register', {
+            email: userData.email,
+            username: userData.username,
+            fullname: userData.fullname,
+            password: password,
         })
         .then((response) => {
             if (response.status === 200) {
@@ -62,7 +87,7 @@ export default function RegisterScreen() {
             }
         })
         .catch((error) => {
-            console.error(error);
+            console.log(error);
             Alert.alert('Register failed', 'Something went wrong');
         });
     };
@@ -75,28 +100,38 @@ export default function RegisterScreen() {
             </Text>
             <InputField icon="mail"
                 placeholder="Enter your email"
-                value={email}
-                onChangeText={setEmail} />
+                value={userData.email}
+                onChangeText={(text) => setUserData({ ...userData, email: text })} />
             <InputField icon="person"
                 placeholder="Enter your username"
-                value={username}
-                onChangeText={setUsername} />
+                value={userData.username}
+                onChangeText={(text) => setUserData({ ...userData, username: text })} />
+            <InputField icon="person"
+                placeholder="Enter your full name"
+                value={userData.fullname}
+                onChangeText={(text) => setUserData({ ...userData, fullname: text })} />
             <InputField
                 icon="lock-closed-outline"
                 placeholder="Enter your password"
                 value={password}
-                onChangeText={setPassword} />
+                onChangeText={setPassword} 
+                secureTextEntry={visiblePassword}
+                setSecureTextEntry={() => setVisiblePassword(!visiblePassword)}
+                />
             <InputField
                 icon="lock-closed-outline"
                 placeholder="Confirm your password"
                 value={confirmPassword}
-                onChangeText={setConfirmPassword} />
+                onChangeText={setConfirmPassword} 
+                secureTextEntry={visibleConfirmPassword}
+                setSecureTextEntry={() => setVisibleConfirmPassword(!visibleConfirmPassword)}
+                />
             <Btn text="REGISTER" onPress={() => signUp()}/>
             <View style={styles.loginContainer}>
                 <Text style={styles.loginText}>
                     Already have an account?
                 </Text>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
                     <Text style={styles.loginNavigate}>
                         Login now!
                     </Text>

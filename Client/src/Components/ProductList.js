@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         borderRadius: 10,
         paddingVertical: 15,
-        paddingHorizontal: 8,
+        paddingHorizontal: 15,
         marginVertical: 10,
     },
     productImage: {
         width: '100%',
-        height: 80,
+        height: 200,
         resizeMode: 'contain',
     },
     productContent: {
@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
     },
     productPrices: {
         fontWeight: 'bold',
-        fontSize: 15,
+        fontSize: 18,
+        color: Colors.red,
     },
     productName: {
         fontWeight: 'bold',

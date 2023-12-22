@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import Colors from "../color";
 import HomeProducts from "../Components/HomeProducts";
 import HomeSearch from "../Components/HomeSearch";
