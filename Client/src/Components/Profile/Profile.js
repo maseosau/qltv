@@ -5,35 +5,24 @@ import Btn from "../Btn";
 import { useAuth } from "../../contexts/authContext";
 import axios from "axios";
 import { NAME_API } from "../../config/ApiConfig";
+import Icon from "react-native-vector-icons/Ionicons"
 
 const Inputs = [
   {
     label: "Full Name",
-    type: "text",
+    type: "default",
   },
   {
     label: "Phone Number",
-    type: "text",
+    type: "phone-pad",
   },
   {
     label: "Email",
-    type: "text",
+    type: "email-address",
   },
   {
     label: "Address",
-    type: "text",
-  },
-  {
-    label: "Old password",
-    type: "password",
-  },
-  {
-    label: "New password",
-    type: "password",
-  },
-  {
-    label: "Confirm password",
-    type: "password",
+    type: "default",
   },
 ];
 
@@ -46,17 +35,11 @@ const Profile = () => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [email, setEmail] = useState(null);
   const [address, setAddress] = useState(null);
-  const [oldPassword, setOldPassword] = useState(null);
-  const [newPassword, setNewPassword] = useState(null);
-  const [confirmNewPassword, setConfirmNewPassword] = useState(null);
   const [formValues, setFormValues] = useState({
     'Full Name': fullname || '',
     'Phone Number': phoneNumber || '',
     'Email': email || '',
     'Address': address || '',
-    'Old password': '',
-    'New password': '',
-    'Confirm password': '',
   });
 
   // Cập nhật giá trị từ useAuth() khi nó thay đổi
@@ -92,19 +75,15 @@ const Profile = () => {
       case 'Address':
         setAddress(value);
         break;
-      case 'Old password':
-        setOldPassword(value);
-        break;
-      case 'New password':
-        setNewPassword(value);
-        break;
-      case 'Confirm password':
-        setConfirmNewPassword(value);
-        break;
       default:
         break;
     }
   };
+
+  function validateEmail(email) {
+    const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailPattern.test(email);
+}
 
   const getInfomation = async () => {
     try {
@@ -121,32 +100,30 @@ const Profile = () => {
 
   const updateProfile = () => {
     setModalVisible(false);
-    if (newPassword !== confirmNewPassword) {
-      console.log('Password not match');
-      return Alert.alert('Change Information Failed', 'Password do not match');
+    setEditable(false);
+
+    if (!validateEmail(email)) {
+      return Alert.alert("Updated Failed", "Invalid Email")
     }
-    else {
-      axios.post(NAME_API.LOCALHOST + `/update/${userId}`, {
-        fullname: fullname,
-        email: email,
-        address: address,
-        phoneNumber: phoneNumber,
-        oldPassword: oldPassword,
-        newPassword: newPassword,
+
+    axios.post(NAME_API.LOCALHOST + `/update/${userId}`, {
+      fullname: fullname,
+      email: email,
+      address: address,
+      phoneNumber: phoneNumber,
+    })
+      .then(response => {
+        if (response.status === 200) {
+          Alert.alert('Updated Successfully');
+        }
+        else {
+          Alert.alert('Updated Failed', response.data.message);
+        }
       })
-        .then(response => {
-          if (response.status === 200) {
-            Alert.alert('Updated Successfully');
-          }
-          else {
-            Alert.alert('Updated Failed', response.data.message);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          Alert.alert('Updated Failed', 'Something went wrong');
-        })
-    }
+      .catch(err => {
+        console.log(err);
+        Alert.alert('Updated Failed', 'Something went wrong');
+      })
   }
 
   useEffect(() => {
@@ -170,8 +147,8 @@ const Profile = () => {
                   fontSize: 17,
                   borderRadius: 10,
                 }}
-                secureTextEntry={i.type === "password"}
-                keyboardType={i.type === "email" ? "email-address" : "default"}
+                // secureTextEntry={i.type === "password" && visiblePassword}
+                keyboardType={i.type}
                 placeholder={i.label}
                 placeholderTextColor={Colors.lightBlack}
                 underlineColorAndroid="transparent"
@@ -184,6 +161,15 @@ const Profile = () => {
                 onChangeText={(text) => handleInputChange(i.label, text)}
                 editable={editable}
               />
+              {
+                formValues[i.label] !== '' ? null : <Icon name="close-circle" style={styles.iconCancel} />
+              }
+              {/* {
+                i.type === "password" && formValues[i.label] !== '' ? (
+                  visiblePassword ? <Icon name="eye-outline" style={styles.iconEye} onPress={() => setVisiblePassword(!visiblePassword)} /> :
+                    <Icon name="eye-off-outline" style={styles.iconEye} onPress={() => setVisiblePassword(!visiblePassword)} />
+                ) : null
+              } */}
             </View>
           ))}
         </View>
@@ -287,4 +273,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
+  iconCheck: {
+    position: 'absolute',
+    top: 35,
+    right: 10,
+    fontSize: 20,
+    color: Colors.main
+  },
+  iconCancel: {
+    position: 'absolute',
+    top: 35,
+    right: 10,
+    fontSize: 20,
+    color: Colors.red
+  },
+  iconEye: {
+    position: 'absolute',
+    top: 35,
+    right: 10,
+    fontSize: 20,
+    color: Colors.main
+  }
 });

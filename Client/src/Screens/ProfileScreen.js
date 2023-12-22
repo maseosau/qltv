@@ -25,7 +25,7 @@ export default function ProfileScreen() {
             const user = response.data.user;
 
             const dateTime = new Date(user.create_at);
-            const formattedDate = dateTime.getDate() + ' ' + (dateTime.getMonth() + 1) + ' ' + dateTime.getFullYear();
+            const formattedDate = dateTime.getDate() + '-' + (dateTime.getMonth() + 1) + '-' + dateTime.getFullYear();
 
             setUserData(prevUserData => ({
                 ...prevUserData,
@@ -40,7 +40,7 @@ export default function ProfileScreen() {
     };
     useEffect(() => {
         getInformation();
-    }, [])
+    }, [userData.fullname])
 
     return (
         <>

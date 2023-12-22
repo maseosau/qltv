@@ -18,6 +18,7 @@ import ProfileScreen from "../Screens/ProfileScreen";
 import SettingScreen from '../Screens/SettingScreen';
 import Colors from '../color';
 import { useAuth } from '../contexts/authContext';
+import ChangePasswordScreen from '../Screens/ChangePasswordScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -149,6 +150,7 @@ function ProfileStack() {
                 }}
             />
             <Stack.Screen name="Settings" component={SettingScreen} />
+            <Stack.Screen name="Change Password" component={ChangePasswordScreen} />
         </Stack.Navigator>
     )
 }

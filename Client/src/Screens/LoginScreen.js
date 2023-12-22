@@ -18,6 +18,7 @@ export default function LoginScreen() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('');
     const [isCheckbox, setIsCheckbox] = useState(false);
+    const [isVisiblePassword, setIsVisiblePassword] = useState(true);
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -25,6 +26,8 @@ export default function LoginScreen() {
             try {
                 const userToken = await AsyncStorage.getItem('userToken');
                 if (userToken !== null) {
+                    const decode = jwtDecode(userToken);
+                    setUserId(decode.userId);
                     setIsLoggedIn(true);
                 }
                 else {
@@ -62,7 +65,7 @@ export default function LoginScreen() {
                 }
             })
             .catch(error => {
-                console.error(error)
+                console.log(error)
                 Alert.alert("Login failed", "Incorrect username or password")
             });
     }
@@ -82,7 +85,10 @@ export default function LoginScreen() {
                 icon="lock-closed-outline"
                 placeholder="Enter your password"
                 value={password}
-                onChangeText={setPassword} />
+                onChangeText={setPassword} 
+                secureTextEntry={isVisiblePassword}
+                setSecureTextEntry={() => setIsVisiblePassword(!isVisiblePassword)}
+                />
             <View style={styles.loginOptions}>
                 <View style={styles.loginRemember}>
                     <CheckBox
@@ -90,10 +96,6 @@ export default function LoginScreen() {
                         value={isCheckbox}
                         onValueChange={() => setIsCheckbox(!isCheckbox)}
                     />
-                    {/* <CheckBox
-                        isChecked={isCheckbox}
-                        onClick={}
-                    /> */}
                     <Text>
                         Remember me
                     </Text>
@@ -183,6 +185,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        gap: 5,
     },
     forgotPassword: {
         color: Colors.blue,

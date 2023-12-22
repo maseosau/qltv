@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../contexts/authContext";
 
 export default function SettingScreen() {
-    const {isLoggedIn, setIsLoggedIn} = useAuth();
+    const { isLoggedIn, setIsLoggedIn } = useAuth();
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
     const removeToken = async () => {
@@ -23,6 +23,18 @@ export default function SettingScreen() {
 
     return (
         <View style={styles.settingContainer}>
+            <View style={styles.optionList}>
+                <TouchableOpacity style={styles.option} onPress={() => navigation.navigate('Change Password')} >
+                    <View style={styles.optionFlex}>
+                        <Icon name="lock-closed-outline" style={styles.optionIcon} />
+                        <Text style={styles.optionText}>
+                            Change Password
+                        </Text>
+                    </View>
+                    <Icon name="chevron-forward" style={styles.forwardIcon} />
+                </TouchableOpacity>
+            </View>
+
             <View style={styles.optionList}>
                 <TouchableOpacity style={styles.option}>
                     <View style={styles.optionFlex}>
