@@ -6,6 +6,7 @@ import All from './All';
 import Male from './Male';
 import Female from './Female';
 import Baby from './Baby';
+import Colors from '../../color';
 
 const initialLayout = { width: Dimensions.get('window').width };
 
@@ -28,10 +29,10 @@ const CategoryTabs = () => {
   const renderTabBar = (props) => (
     <TabBar
       {...props}
-      style={{ backgroundColor: 'black' }}
-      indicatorStyle={{ backgroundColor: 'white' }}
-      activeColor={'#48B600'}
-      inactiveColor={'#FFFFFF'}
+      style={{ backgroundColor: Colors.white }}
+      indicatorStyle={{ backgroundColor: Colors.main }}
+      activeColor={Colors.main}
+      inactiveColor={Colors.black}
     />
   );
 
@@ -42,6 +43,7 @@ const CategoryTabs = () => {
       onIndexChange={setIndex}
       initialLayout={initialLayout}
       renderTabBar={renderTabBar}
+      style={{backgroundColor: Colors.subGreen}}
     />
   );
 };

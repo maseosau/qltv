@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import UnauthenticatedNavigation from './UnauthenticatedNavigation';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Entypo, AntDesign, FontAwesome, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo, AntDesign, FontAwesome, Ionicons, FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import HomeScreen from '../Screens/HomeScreen';
 import ShippingScreen from "../Screens/ShippingScreen";
@@ -19,6 +19,7 @@ import SettingScreen from '../Screens/SettingScreen';
 import Colors from '../color';
 import { useAuth } from '../contexts/authContext';
 import ChangePasswordScreen from '../Screens/ChangePasswordScreen';
+import CategoryScreen from '../Screens/CategoryScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,13 +39,6 @@ const Tab = createBottomTabNavigator();
 //         return false;
 //     }
 // };
-
-
-const CustomTab = ({ children, onPress }) => (
-    <TouchableOpacity onPress={onPress} style={styles.customTab}>
-        {children}
-    </TouchableOpacity>
-);
 
 function HomeBottom() {
     return (
@@ -66,9 +60,25 @@ function HomeBottom() {
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.center}>
                             {focused ? (
-                                <Entypo name="home" size={24} color={Colors.main} />
+                                <Entypo name="home" size={30} color={Colors.main} />
                             ) : (
                                 <AntDesign name="home" size={24} color={Colors.black} />
+                            )}
+                        </View>
+                    ),
+                }}
+            />
+            {/* Category */}
+            <Tab.Screen
+                name="CategoryBottom"
+                component={CategoryStack}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={styles.center}>
+                            {focused ? (
+                                <AntDesign name="appstore1" size={30} color={Colors.main} />
+                            ) : (
+                                <AntDesign name="appstore-o" size={24} color={Colors.black} />
                             )}
                         </View>
                     ),
@@ -79,13 +89,13 @@ function HomeBottom() {
                 name="CartBottom"
                 component={CartStack}
                 options={{
-                    tabBarButton: (props) => <CustomTab {...props} />,
+                    // tabBarButton: (props) => <CustomTab {...props} />,
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.center}>
                             {focused ? (
-                                <FontAwesome5 name="shopping-basket" size={24} color={Colors.white} />
+                                <Ionicons name="cart" size={30} color={Colors.main} />
                             ) : (
-                                <MaterialCommunityIcons name="shopping-outline" size={24} color={Colors.white} />
+                                <Ionicons name="cart-outline" size={24} color={Colors.black} />
                             )}
                         </View>
                     ),
@@ -99,7 +109,7 @@ function HomeBottom() {
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.center}>
                             {focused ? (
-                                <FontAwesome name="user" size={24} color={Colors.main} />
+                                <FontAwesome name="user" size={30} color={Colors.main} />
                             ) : (
                                 <AntDesign name="user" size={24} color={Colors.black} />
                             )}
@@ -116,6 +126,19 @@ function HomeStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="HomeScreen" component={HomeScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen name="Single" component={ProductDetail} />
+        </Stack.Navigator>
+    )
+}
+
+function CategoryStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="CategoryScreen" component={CategoryScreen}
                 options={{
                     headerShown: false,
                 }}
@@ -187,24 +210,6 @@ const styles = StyleSheet.create({
         elevation: 0,
         backgroundColor: Colors.white,
         height: 60,
-    },
-    customTab: {
-        height: 70,
-        width: 70,
-        borderRadius: 35,
-        backgroundColor: Colors.main,
-        justifyContent: "center",
-        alignItems: "center",
-        // position: "absolute",
-        top: -30,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
     },
     center: {
         justifyContent: "center",
