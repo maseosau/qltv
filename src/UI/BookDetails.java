@@ -121,7 +121,7 @@ public class BookDetails extends javax.swing.JFrame {
 
         categoryLabel.setText("Category");
 
-        categoryInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiction", "non-fiction", "Biography", "Children's books", "Cookbooks", "Graphic novels", "Humor", "Memoirs", "Music", "Nature", "Philosophy", "Politics", "Religion", "Romance", "Science", "Self-help", "Sports", "Travel" }));
+        categoryInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Truyen ngan", "Van hoc Trung Quoc", "Van hoc My", "Van hoc Anh", "Khoa hoc vien tuong", "Tieu thuyet gia tuong", "Truyen tranh", "Triet hoc", "Tam ly hoc", "Hinh su", "Ngon tinh", "Van hoc", "Kinh dien" }));
 
         descriptionLabel.setText("Description");
 
@@ -131,7 +131,7 @@ public class BookDetails extends javax.swing.JFrame {
 
         languageLabel.setText("Language");
 
-        languageInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sinhala", "Tamil", "English", "Other" }));
+        languageInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tieng Viet", "Tieng Nga", "Tieng Trung", "Tieng Anh", "Tieng Nhat", "Other" }));
 
         stateLabel.setText("State");
 
