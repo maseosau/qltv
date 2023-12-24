@@ -96,9 +96,7 @@ ALTER TABLE `books`
 -- Indexes for table `book_lending`
 --
 ALTER TABLE `book_lending`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_lending` (`book_id`),
-  ADD KEY `member_lending` (`member_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `members`
@@ -137,14 +135,6 @@ ALTER TABLE `members`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `book_lending`
---
-ALTER TABLE `book_lending`
-  ADD CONSTRAINT `book_lending` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
-  ADD CONSTRAINT `member_lending` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`);
-COMMIT;
 
 --
 -- Insert data
