@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Mar 25, 2022 at 06:56 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -141,16 +133,6 @@ ALTER TABLE `members`
 -- Insert user
 INSERT INTO `users` (`full_name`, `user_name`, `password`, `role`, `nic`, `mail`, `address`) 
 VALUES ('sau', 'seosau', 'b82a4ed4e5b37f92d9db11e5487443e8', 'user', '123', 'sau@gmail.com', 'HCM');
--- CREATE TABLE `books` (
---   `id` int(11) NOT NULL,
---   `name` varchar(255) NOT NULL,
---   `author` varchar(255) DEFAULT NULL,
---   `category` varchar(255) NOT NULL,
---   `isbn` int(11) NOT NULL,
---   `description` varchar(255) DEFAULT NULL,
---   `language` varchar(64) NOT NULL,
---   `state` int(11) NOT NULL COMMENT '1 = available\r\n2 = borrowed'
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Insert books
 -- INSERT INTO `books` (`id`, `name`, `author`, `description`, `category`, `isbn`, `language`, `state`) VALUES
